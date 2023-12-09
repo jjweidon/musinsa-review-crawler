@@ -7,9 +7,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import WebDriverException
-from selenium.common.exceptions import TimeoutException
-from selenium.common.exceptions import UnexpectedAlertPresentException, NoAlertPresentException
-from selenium.webdriver.common.alert import Alert
 from typing import Dict,List
 
 FILE_PATH = 'C:/Users/weidon/Desktop/myproject/musinsa-review-crawler/sample.csv' # csv 파일 설치 경로
@@ -200,4 +197,3 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
             continue
 
 f.close()
-
