@@ -1,21 +1,21 @@
 # 사용 방법
 
-<h1>설치 | Installation</h1>
+<h2>설치 | Installation</h2>
 git clone https://github.com/jjweidon/musinsa-review-crawler.git
 cd musinsa-review-crawler
 
-<h3>pip 가상환경 실행</h3>
+<h5>pip 가상환경 실행</h5>
 pipenv shell
 pip install -r ./requirements.txt
 
-<h1>설정 | Setting</h1>
-<h3>csv 파일을 생성할 경로 설정</h3>
+<h2>설정 | Setting</h2>
+<h5>csv 파일을 생성할 경로 설정</h5>
 FILE_PATH = 'C:/Users/weidon/Desktop/myproject/musinsa-review-crawler/sample.csv'
-<h3>파일 모드 선택. 처음 파일 생성할 때는 w, 이후 행만 추가할 때는 a</h3>
+<h5>파일 모드 선택. 처음 파일 생성할 때는 w, 이후 행만 추가할 때는 a</h5>
 MODE = 'w'
-<h3>시작 상품코드, 끝 상품코드 설정</h3>
+<h5>시작 상품코드, 끝 상품코드 설정</h5>
 START = 3001200
 END = 3002000
 
-<h1>실행 | Usage</h1>
+<h2>실행 | Usage</h2>
 python main.py
