@@ -1,0 +1,5 @@
+openpyxl
+requests
+bs4
+selenium
+lxml
