@@ -11,9 +11,11 @@ from typing import Dict,List
 
 CATEGORY_CODE = "001"
 FILE_PATH = f'C:/Users/weidon/Desktop/myproject/musinsa-review-crawler/{CATEGORY_CODE}.csv' # csv 파일 설치 경로
+# FILE_PATH = f'C:/Users/weidon/Desktop/myproject/musinsa-review-crawler/sample.csv' # csv 샘플 파일 설치 경로
 MODE = 'w' # 새 파일 생성: w, 행만 추가: a
-# START = 3009402 # 시작 상품 코드
-# END = 3010000 # 끝 상품 코드
+
+START = 1 # 시작 페이지 번호
+END = 2 # 끝 페이지 번호
 
 def get_category(category_code):
     if category_code == "001":
