@@ -7,7 +7,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import WebDriverException
-from typing import Dict,List
 
 CATEGORY_CODE = "001"
 FILE_PATH = f'C:/Users/weidon/Desktop/myproject/musinsa-review-crawler/{CATEGORY_CODE}.csv' # csv 파일 설치 경로
@@ -58,7 +57,7 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
     driver = webdriver.Chrome(options=options)
 
     for page in range(START, END+1):
-        page_url = f"https://www.musinsa.com/categories/item/{CATEGORY_CODE}?d_cat_cd={CATEGORY_CODE}&brand=&list_kind=small&sort=emt_high&sub_sort=&page={page}&display_cnt=90&group_sale=&exclusive_yn=&sale_goods=&timesale_yn=&ex_soldout=&plusDeliveryYn=&kids=&color=&price1=&price2=&shoeSizeOption=&tags=&campaign_id=&includeKeywords=&measure="
+        page_url = f"https://www.musinsa.com/categories/item/{CATEGORY_CODE}?d_cat_cd={CATEGORY_CODE}&bra_kind=small&sort=emt_high&sub_sort=&page={page}&display_cnt=90&group_sale=&exclusive_yn=&sale_goods=&timesale_yn=&ex_soldout=&plusDeliveryYn=&kids=&color=&price1=&price2=&shoeSizeOption=&tags=&campaign_id=&includeKeywords=&measure="
         try:
             driver.get(page_url)
             sleep(2)
@@ -71,10 +70,10 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
 
             # html 요소 찾기
             page_soup = bs(driver.page_source, 'lxml')
-            search = page_soup.find("ul", attrs={"id": "searchList"})
-            code_list = search.find_all("li", attrs={"class": "li_box"})
+            search = page_soup.find("ul", attrs={"id": "se"})
+            c = search.find_all("li", attrs={"class": "li_box"})
 
-            for li in code_list:
+            for li in c:
                 code = int(li['data-no'])
                 print(f"{code} 가져오기 성공")
                 url = f"https://www.musinsa.com/app/goods/{code}"
@@ -132,10 +131,10 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
 
                         # 리뷰 목록 가져오기
                         soup = bs(driver.page_source, 'lxml')
-                        review_wrap = soup.find("div", attrs={"class": "review-list-wrap"})
+                        review_wrap = soup.find("div", attrs={"class": "rev-wrap"})
 
                         # 리뷰 없으면 그대로 진행
-                        if review_wrap.find("div", attrs={"class": "review-list--none"}):
+                        if review_wrap.find("div", attrs={"class": "rev--none"}):
                             print("후기 없음")
                             continue
 
@@ -149,13 +148,13 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
 
                             # 리뷰 목록 가져오기
                             soup = bs(driver.page_source, 'lxml')
-                            review_wrap = soup.find("div", attrs={"class": "review-list-wrap"})
+                            review_wrap = soup.find("div", attrs={"class": "rev-wrap"})
 
                             # 리뷰 개수 구하기
-                            review_list = review_wrap.find_all("div", attrs={"class": "review-list"})
-                            review_cnt = len(review_list)
+                            rev = review_wrap.find_all("div", attrs={"class": "rev"})
+                            review_cnt = len(rev)
                             # 리뷰 목록
-                            for r, review in enumerate(review_list):
+                            for r, review in enumerate(rev):
                                 # 변수 초기화
                                 sex = "-"
                                 height = 0
@@ -240,7 +239,7 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
                                 break
                             page_number = (p % 5) + 4
                             element = WebDriverWait(driver, 15).until(
-                                EC.element_to_be_clickable((By.XPATH, f'//*[@id="reviewListFragment"]/div[{review_cnt+1}]/div[2]/div/a[{page_number}]'))
+                                EC.element_to_be_clickable((By.XPATH, f'//*[@id="reFragment"]/div[{review_cnt+1}]/div[2]/div/a[{page_number}]'))
                             )
                             element.click()
                             sleep(1)
