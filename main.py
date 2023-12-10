@@ -57,7 +57,7 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
     options.add_argument('--ignore-certificate-errors')
     driver = webdriver.Chrome(options=options)
 
-    for page in range(1, 5):
+    for page in range(START, END+1):
         page_url = f"https://www.musinsa.com/categories/item/{CATEGORY_CODE}?d_cat_cd={CATEGORY_CODE}&brand=&list_kind=small&sort=emt_high&sub_sort=&page={page}&display_cnt=90&group_sale=&exclusive_yn=&sale_goods=&timesale_yn=&ex_soldout=&plusDeliveryYn=&kids=&color=&price1=&price2=&shoeSizeOption=&tags=&campaign_id=&includeKeywords=&measure="
         try:
             driver.get(page_url)
