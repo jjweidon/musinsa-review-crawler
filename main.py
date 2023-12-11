@@ -14,7 +14,7 @@ FILE_PATH = f'C:/Users/weidon/Desktop/myproject/musinsa-review-crawler/{CATEGORY
 # FILE_PATH = f'C:/Users/weidon/Desktop/myproject/musinsa-review-crawler/sample.csv' # csv 샘플 파일 설치 경로
 MODE = 'w' # 새 파일 생성: w, 행만 추가: a
 
-START = 1 # 시작 페이지 번호
+START = 2 # 시작 페이지 번호
 END = 2 # 끝 페이지 번호
 
 def get_category(category_code):
@@ -74,7 +74,9 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
             search = page_soup.find("ul", attrs={"id": "searchList"})
             code_list = search.find_all("li", attrs={"class": "li_box"})
 
-            for li in code_list:
+            for n, li in enumerate(code_list):
+                # if n < 5:
+                #     continue
                 code = int(li['data-no'])
                 print(f"{code} 가져오기 성공")
                 url = f"https://www.musinsa.com/app/goods/{code}"
@@ -243,7 +245,7 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
                                 EC.element_to_be_clickable((By.XPATH, f'//*[@id="reviewListFragment"]/div[{review_cnt+1}]/div[2]/div/a[{page_number}]'))
                             )
                             element.click()
-                            sleep(1)
+                            sleep(0.8)
                             
                 except WebDriverException:
                     print(f"{code}는 없는 상품 페이지")
