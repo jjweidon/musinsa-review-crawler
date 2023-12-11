@@ -14,7 +14,7 @@ FILE_PATH = f'C:/Users/weidon/Desktop/myproject/musinsa-review-crawler/{CATEGORY
 MODE = 'w' # 새 파일 생성: w, 행만 추가: a
 
 START = 2 # 시작 페이지 번호
-END = 2 # 끝 페이지 번호
+END = 10 # 끝 페이지 번호
 
 def get_category(category_code):
     if category_code == "001":
@@ -56,16 +56,16 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
     options.add_argument('--ignore-certificate-errors')
     driver = webdriver.Chrome(options=options)
 
-    for page in range(START, END+1):
-        page_url = f"https://www.musinsa.com/categories/item/{CATEGORY_CODE}?d_cat_cd={CATEGORY_CODE}&brand=&list_kind=small&sort=emt_high&sub_sort=&page={page}&display_cnt=90&group_sale=&exclusive_yn=&sale_goods=&timesale_yn=&ex_soldout=&plusDeliveryYn=&kids=&color=&price1=&price2=&shoeSizeOption=&tags=&campaign_id=&includeKeywords=&measure="
+    for category_page in range(START, END+1):
+        page_url = f"https://www.musinsa.com/categories/item/{CATEGORY_CODE}?d_cat_cd={CATEGORY_CODE}&brand=&list_kind=small&sort=emt_high&sub_sort=&page={category_page}&display_cnt=90&group_sale=&exclusive_yn=&sale_goods=&timesale_yn=&ex_soldout=&plusDeliveryYn=&kids=&color=&price1=&price2=&shoeSizeOption=&tags=&campaign_id=&includeKeywords=&measure="
         try:
             driver.get(page_url)
             sleep(2)
             # 웹 페이지 호출 상태 점검
             if driver.page_source:
-                print(f"{page}페이지 가져오기 성공!")
+                print(f"{category_page}페이지 가져오기 성공!")
             else:
-                print(f"{page}페이지 가져오기 실패!")
+                print(f"{category_page}페이지 가져오기 실패!")
                 continue
 
             # html 요소 찾기
@@ -144,7 +144,6 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
                         print(f"총 {pages}페이지 탐색")
 
                         for p in range(pages):
-                            # print(f"{code} {review_type}의 {p+1}/{pages} 페이지 보는 중")
 
                             # 리뷰 목록 가져오기
                             soup = bs(driver.page_source, 'lxml')
@@ -228,7 +227,7 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
                                 if goods_information:
                                     option = goods_information.find("span", attrs={"class": "review-goods-information__option"}).text.strip()
                                 
-                                print(f"{code} {review_type}의 {p+1}/{pages} 페이지에서 {r+1}번째 리뷰")
+                                print(f"{category} {category_page}페이지 {n+1}: {code} {review_type}의 {p+1}/{pages} 페이지에서 {r+1}번째 리뷰")
                                 writer.writerow({'상품코드': code, '브랜드명': brand, '상품명': name, '카테고리': category, '가격': price,
                                                 '성별': sex, '리뷰내용': content, '옵션': option, '키': height, '몸무게': weight,
                                                 '배송': delivary, '포장': packaging, '사이즈': size, '밝기': brightness, '색감': color,
