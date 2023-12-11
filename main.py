@@ -7,7 +7,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import WebDriverException
-from typing import Dict,List
 
 CATEGORY_CODE = "001"
 FILE_PATH = f'C:/Users/weidon/Desktop/myproject/musinsa-review-crawler/{CATEGORY_CODE}.csv' # csv 파일 설치 경로
@@ -75,8 +74,6 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
             code_list = search.find_all("li", attrs={"class": "li_box"})
 
             for n, li in enumerate(code_list):
-                # if n < 5:
-                #     continue
                 code = int(li['data-no'])
                 print(f"{code} 가져오기 성공")
                 url = f"https://www.musinsa.com/app/goods/{code}"
