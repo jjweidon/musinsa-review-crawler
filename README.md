@@ -1,4 +1,4 @@
-# 사용 방법
+# 크롤링 사용 방법
 
 <h2>설치 | Installation</h2>
 git clone https://github.com/jjweidon/musinsa-review-crawler.git
@@ -18,7 +18,7 @@ MODE = 'w'
 <h3>시작 페이지 번호, 끝 페이지 번호 설정</h3>
 START = 1
 END = 2
-앞 번호에는 후기가 많으니 조금씩 나누는 것 추천
+앞 번호에는 후기가 너무 많으니 조금씩 나누는 것 추천
 
 <h2>실행 | Usage</h2>
 python main.py

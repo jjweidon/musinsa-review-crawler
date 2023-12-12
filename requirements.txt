@@ -3,3 +3,5 @@ requests
 bs4
 selenium
 lxml
+pandas
+matplotlib

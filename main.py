@@ -10,8 +10,7 @@ from selenium.common.exceptions import WebDriverException
 
 CATEGORY_CODE = "001"
 FILE_PATH = f'C:/Users/weidon/Desktop/myproject/musinsa-review-crawler/{CATEGORY_CODE}.csv' # csv 파일 설치 경로
-# FILE_PATH = f'C:/Users/weidon/Desktop/myproject/musinsa-review-crawler/sample.csv' # csv 샘플 파일 설치 경로
-MODE = 'w' # 새 파일 생성: w, 행만 추가: a
+MODE = 'a' # 새 파일 생성: w, 행만 추가: a
 
 START = 2 # 시작 페이지 번호
 END = 10 # 끝 페이지 번호
@@ -52,7 +51,6 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
     writer.writeheader()
 
     options = webdriver.ChromeOptions()
-    # options.add_argument("headless") # 크롬 창 안띄우기
     options.add_argument('--ignore-certificate-errors')
     driver = webdriver.Chrome(options=options)
 
@@ -248,7 +246,7 @@ with open(FILE_PATH, MODE, encoding='utf-8-sig', newline='') as f:
                     continue
         
         except WebDriverException:
-            print(f"{page}는 접속할 수 없는 페이지")
+            print(f"{category_page}는 접속할 수 없는 페이지")
             continue
 
 f.close()
